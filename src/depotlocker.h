@@ -21,7 +21,7 @@ public:
 	void removeInbox(Inbox* inbox);
 
 	// serialization
-	Attr_ReadValue readAttr(AttrTypes_t attr, PropStream& propStream) override;
+	void readAttr(AttrTypes_t attr, OTB::iterator& first, OTB::iterator const last) override;
 
 	uint16_t getDepotId() const { return depotId; }
 	void setDepotId(uint16_t depotId) { this->depotId = depotId; }
