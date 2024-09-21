@@ -15,13 +15,11 @@
 
 extern Game g_game;
 
-bool Map::loadMap(const std::string& identifier, bool loadHouses)
+void Map::loadMap(const std::string& identifier, bool loadHouses)
 {
 	IOMap loader;
-	if (!loader.loadMap(this, identifier)) {
-		std::cout << "[Fatal - Map::loadMap] " << loader.getLastErrorString() << std::endl;
-		return false;
-	}
+
+	loader.loadMap(this, identifier);
 
 	if (!IOMap::loadSpawns(this)) {
 		std::cout << "[Warning - Map::loadMap] Failed to load spawn data." << std::endl;
@@ -35,7 +33,6 @@ bool Map::loadMap(const std::string& identifier, bool loadHouses)
 		IOMapSerialize::loadHouseInfo();
 		IOMapSerialize::loadHouseItems(this);
 	}
-	return true;
 }
 
 bool Map::save()
