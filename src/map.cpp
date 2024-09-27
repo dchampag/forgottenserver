@@ -17,16 +17,16 @@ extern Game g_game;
 
 void Map::loadMap(const std::string& identifier, bool loadHouses)
 {
-	IOMap loader;
+	auto attributes = tfs::io::map::loadMap(*this, identifier);
+	width = attributes.width;
+	height = attributes.height;
 
-	loader.loadMap(this, identifier);
-
-	if (!IOMap::loadSpawns(this)) {
+	if (!spawns.loadFromXml(attributes.spawns)) {
 		std::cout << "[Warning - Map::loadMap] Failed to load spawn data." << std::endl;
 	}
 
 	if (loadHouses) {
-		if (!IOMap::loadHouses(this)) {
+		if (!houses.loadHousesXML(attributes.houses)) {
 			std::cout << "[Warning - Map::loadMap] Failed to load house data." << std::endl;
 		}
 
