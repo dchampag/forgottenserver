@@ -82,9 +82,11 @@ namespace tfs {
 template <class T>
 using std::to_underlying<T>;
 
+template <class E>
+
 #else
 
-inline constexpr auto to_underlying(auto e) noexcept { return static_cast<std::underlying_type_t<decltype(e)>>(e); }
+inline constexpr auto to_underlying(E e) noexcept { return static_cast<std::underlying_type_t<decltype(e)>>(e); }
 
 #endif
 
